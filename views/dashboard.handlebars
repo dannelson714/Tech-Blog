@@ -1,29 +1,13 @@
-<div class="row justify-space-between-md">
-  <div class="login-card">
-    <h2 class="page-title">New Post</h2>
-        <div class="collapse" id="collapseExample">
-            <form class="form login-form">
-            <div class="form-group">
-                <label for="post-title">Title:</label>
-                <input class="form-input" type="text" size="50" id="post-title" />
-            </div>
-            <div class="form-group">
-                <label for="post-title">Content:</label>
-                <textarea class="form-input" rows="'3" cols="50" id="post-content"></textarea>
-            </div>
-            <div class="form-group">
-                 <button class="btn btn-primary" type="submit">Create</button>
-            </div>
-            </form>
-        </div>
+ {{#each posts as |post|}}
+  <section class="container">
+    <h3 class="gallery-name">{{post.title}}</h3>
+    <h4>{{post.content}}</h4>
+    <h4>{{post.posting_date}}</h4>
+    </section>
+  {{/each}}
     <div class="form-group">
-    <button class="btn btn-primary" type="button" data-toggle="collapse" 
-    data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        New Post +
-        </button>
+        <form action="/new">
+             <input type="submit" value="New Post +" />
+        </form>
     </div>
-    
-  </div>
-</div>
 
-<script src="./js/login.js"></script>

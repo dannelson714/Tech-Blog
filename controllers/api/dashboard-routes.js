@@ -6,6 +6,7 @@ router.post('/', async (req,res) => {
         const postData = await Post.create({
             title: req.body.title,
             content: req.body.password,
+            posting_date: req.body.date,
             user_id: req.session.currentUser,
         });
         res.status(200).json(postData);

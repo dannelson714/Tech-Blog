@@ -12,10 +12,6 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['user_name'],
         },
-        {
-          model: Comment,
-          attributes: ['content'],
-        },
       ],
     });
 
@@ -82,6 +78,26 @@ router.get('/signup', (req, res) => {
 module.exports = router;
 
 router.get('/dashboard', (req, res) => {
-  
-  res.render('dashboard');
+  try {
+    const dbBlogPosts = await User.findByPk(req.session.currentUser, {
+      include: [
+        {
+          model: Post,
+          attributes: ['title','content'],
+        },
+      ],
+    });
+
+    const posts = dbBlogPosts.map((post) =>
+      post.get({ plain: true })
+    );
+
+    res.render('dashboard', {
+      posts,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
